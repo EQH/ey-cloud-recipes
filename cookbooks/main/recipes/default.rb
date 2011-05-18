@@ -4,6 +4,9 @@
 #  }
 #end
 
+# uncomment if you want to run node.js recipe
+require_recipe 'node_js'
+
 # uncomment if you want to run postgres recipe
 #require_recipe 'postgres'
 
