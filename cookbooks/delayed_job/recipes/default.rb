@@ -5,7 +5,7 @@
 
 if node[:instance_role] == "util" && node[:name] !~ /^(mongodb|redis|memcache|admin)/
   node[:applications].each do |app_name,data|
-    next if app_name == "admin"  
+    return if app_name == "admin"  
     # determine the number of workers to run based on instance size
     if node[:instance_role] == 'solo'
       worker_count = 1
