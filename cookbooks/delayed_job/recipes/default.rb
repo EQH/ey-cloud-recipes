@@ -5,7 +5,8 @@
 
 if node[:instance_role] == "util" && node[:name] !~ /^(mongodb|redis|memcache|admin)/
   node[:applications].each do |app_name,data|
-    return if app_name == "admin"  
+    next if app_name == 'admin'
+    puts "app_name is #{app_name}"    
     # determine the number of workers to run based on instance size
     if node[:instance_role] == 'solo'
       worker_count = 1
@@ -28,7 +29,7 @@ if node[:instance_role] == "util" && node[:name] !~ /^(mongodb|redis|memcache|ad
         variables({
           :app_name => app_name,
           :user => node[:owner_name],
-          :worker_name => "delayed_job#{count+1}_#{app_name}",
+          :worker_name => "delayed_job#{count+1}",
           :framework_env => node[:environment][:framework_env]
         })
       end
