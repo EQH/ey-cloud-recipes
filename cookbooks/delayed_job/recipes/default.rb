@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 
-if node[:instance_role] == "solo" || (node[:instance_role] == "util" && node[:name] !~ /^(mongodb|redis|memcache)/)
+if node[:instance_role] == "util" && node[:name] !~ /^(mongodb|redis|memcache|admin)/
   node[:applications].each do |app_name,data|
   
     # determine the number of workers to run based on instance size
@@ -28,7 +28,7 @@ if node[:instance_role] == "solo" || (node[:instance_role] == "util" && node[:na
         variables({
           :app_name => app_name,
           :user => node[:owner_name],
-          :worker_name => "delayed_job#{count+1}",
+          :worker_name => "delayed_job#{count+1}_#{app_name}",
           :framework_env => node[:environment][:framework_env]
         })
       end
