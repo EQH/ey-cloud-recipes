@@ -7,6 +7,9 @@
 # uncomment if you want to run node.js recipe
 require_recipe 'node_js'
 
+# uncomment if you want to run delayed_job recipe
+require_recipe 'delayed_job'
+
 # uncomment if you want to run postgres recipe
 #require_recipe 'postgres'
 
