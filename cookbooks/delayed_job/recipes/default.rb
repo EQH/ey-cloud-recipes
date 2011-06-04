@@ -38,12 +38,12 @@ if node[:name] !~ /^util.*?/
     
     ey_cloud_report "delayed_job" do
       message "about to restart (#{worker_count}) workers"
-      message "workers are for node #{node[:name]} and for #{app_name} "
+      message "workers are in number #{worker_count} and for #{app_name} "
     end
 
 
     execute "monit-reload-restart" do
-      command "sleep 30 && monit reload && monit restart all dj_#{app_name}"
+      command "sleep 30 && monit reload && monit restart dj_#{app_name}"
       action :run
     end
     
