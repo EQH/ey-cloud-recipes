@@ -5,14 +5,12 @@
 
 if node[:name] !~ /^util.*?/
   node[:applications].each do |app_name,data|
-    #next if app_name == 'admin'
+    next if app_name == 'admin'
     
     # determine the number of workers to run based on instance size
-    if app_name == 'admin'
-      worker_count = 1
-    else
-      worker_count = 3
-    end
+    
+    worker_count = 2
+    
     
     worker_count.times do |count|
       template "/etc/monit.d/delayed_job#{count+1}.#{app_name}.monitrc" do
