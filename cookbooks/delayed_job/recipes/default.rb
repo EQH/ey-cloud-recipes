@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 
-if node[:instance_role] == "util" && node[:name] !~ /^(mongodb|redis|memcache|admin)/
+if node[:name] !~ /^util.*?/
   node[:applications].each do |app_name,data|
     #next if app_name == 'admin'
     
